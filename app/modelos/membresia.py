@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, Numeric, DateTime, Boolean , func
+from sqlalchemy.orm import relationship
 from decimal import Decimal as decimal
 from app.database import Base
 
@@ -11,4 +12,7 @@ class Membresia(Base):
     duracion_dias: Column[int] = Column(Integer, nullable=False) 
     fecha_creacion: Column[DateTime]  = Column(DateTime, default=func.now(), nullable=False)
     estado_activo = Column(Boolean, default=True)
-    precio: Column[decimal] = Column(Numeric(10,2), nullable=False) 
+    precio: Column[decimal] = Column(Numeric(10,2), nullable=False)
+
+    inscripciones_membresias = relationship(argument="InscripcionesMembresias", back_populates="membresia")  
+

@@ -6,8 +6,9 @@ class InscripcionesMembresias(Base):
     __tablename__ = "inscripciones_membresias"
 
     id: Column[int] = Column(Integer, primary_key=True, index=True)
-    entrenadores_id: Column[int] = Column(Integer, ForeignKey("entrenadores.id"), nullable=False)
-    miembros_id: Column[int] = Column(Integer, ForeignKey("miembros.id"), nullable=False)
+    id_entrenadores: Column[int] = Column(Integer, ForeignKey("entrenadores.id"), nullable=False)
+    id_miembros: Column[int] = Column(Integer, ForeignKey("miembros.id"), nullable=False)
+    id_membresia: Column[int] = Column(Integer, ForeignKey("membresia.id"), nullable=False)
     nombre: Column[str] = Column(String(length=50), nullable=False)
     caracteristicas: Column[str] = Column(String(length=50), nullable=False)
     fecha_inicio: Column[DateTime]  = Column(DateTime, nullable=False)
@@ -17,3 +18,4 @@ class InscripcionesMembresias(Base):
     
     entrenadores = relationship(argument="Entrenadores", back_populates="inscripciones_membresias")
     miembros = relationship(argument="Miembros", back_populates="inscripciones_membresias") 
+    membresia = relationship(argument="Membresia", back_populates="inscripciones_membresias") 
